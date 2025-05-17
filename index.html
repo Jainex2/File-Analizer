@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Document Analyzer</h1>
+            <p>Upload CSV files and find exactly what you need</p>
+        </header>
+
+        <section class="upload-section">
+            <div class="upload-container">
+                <div class="upload-area" id="uploadArea">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2258/2258853.png" alt="Upload Icon" class="upload-icon">
+                    <h3>Drop your file here or</h3>
+                    <label for="fileInput" class="upload-btn">Browse Files</label>
+                    <input type="file" id="fileInput" accept=".csv" hidden>
+                    <p class="file-info">Supports CSV files</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="file-details" id="fileDetails">
+            <div class="file-header">
+                <div class="file-info-container">
+                    <div id="fileIcon" class="file-icon"></div>
+                    <div class="file-meta">
+                        <h3 id="fileName">No file selected</h3>
+                        <p id="fileSize">-</p>
+                    </div>
+                </div>
+                <button id="clearFileBtn" class="clear-file-btn">Clear</button>
+            </div>
+        </section>
+
+        <section class="search-section" id="searchSection">
+            <div class="search-container">
+                <div class="search-input-container">
+                    <input type="text" id="searchInput" placeholder="Search in document...">
+                    <button id="searchBtn">Search</button>
+                </div>
+                
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label>Search Type:</label>
+                        <select id="searchType">
+                            <option value="contains">Contains</option>
+                            <option value="exact">Exact Match</option>
+                            <option value="startsWith">Starts With</option>
+                            <option value="endsWith">Ends With</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group" id="columnFilterContainer">
+                        <label>Column Filter:</label>
+                        <select id="columnFilter">
+                            <option value="all">All Columns</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Case Sensitive:</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="caseSensitive">
+                            <label for="caseSensitive"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2>Results</h2>
+                <div class="results-actions">
+                    <button id="exportBtn" class="export-btn">Export Results</button>
+                    <select id="resultsPerPage">
+                        <option value="10">10 per page</option>
+                        <option value="25">25 per page</option>
+                        <option value="50">50 per page</option>
+                        <option value="100">100 per page</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="results-summary" id="resultsSummary">
+                <span id="resultCount">0</span> results found
+            </div>
+            
+            <div class="results-container" id="resultsContainer">
+                <table id="resultsTable">
+                    <thead id="tableHeader">
+                        <!-- Table headers will be dynamically generated -->
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table content will be dynamically generated -->
+                    </tbody>
+                </table>
+                
+                <div class="empty-state" id="emptyState">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png" alt="No results" class="empty-icon">
+                    <h3>No results to display</h3>
+                    <p>Try uploading a file or adjusting your search criteria</p>
+                </div>
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be dynamically generated -->
+            </div>
+        </section>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p id="loadingText">Processing your file...</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';</script>
+    <script src="script.js"></script>
+</body>
+</html>
